@@ -1,7 +1,7 @@
 
 import sys
 
-# Simula una porta logica OR con un perceptron
+# Simulate an OR logic gate with a perceptron
 def perceptron_OR(x1, x2):
     w1 = 1
     w2 = 1
@@ -9,7 +9,7 @@ def perceptron_OR(x1, x2):
     output = 1 if (x1*w1 + x2*w2 + b) >= 0 else 0
     return output
 
-# Simula una porta logica AND con un perceptron
+# Simulate an AND logic gate with a perceptron
 def perceptron_AND(x1, x2):
     w1 = 1
     w2 = 1
@@ -17,35 +17,35 @@ def perceptron_AND(x1, x2):
     output = 1 if (x1*w1 + x2*w2 + b) >= 0 else 0
     return output
 
-# Verifica se il PIN inserito corrisponde a quello salvato per l'utente
+# Check if the PIN entered matches the one saved for the user
 def check_user_pin(account_data, pin, entered_pin):
-    if pin in account_data:   # Assumiamo che 'pin' sia una chiave nel dizionario dell'account
+    if pin in account_data:   # Let's assume that 'pin' is a key in the account dictionary
         if accounts[pin].get('password') == entered_pin:
-            return True # Il PIN è corretto, restituisci True
+            return True # The PIN is correct, return True
     return False    # Altrimenti False
 
-# Restituisce True se l'account è bloccato
+# Returns True if the account is blocked
 def account_locked(account_data, username_locked):  # Funzione per controllare se l'account è bloccato
     if username_locked in account_data:
         if accounts[username_locked].get('block') == True:
             return True
     return False
 
-# Restituisce True se l'utente ha raggiunto il numero massimo di tentativi
+# Returns True if the user has reached the maximum number of attempts
 def count_tentative(account_data, username):
     if username in account_data:
         if accounts[username].get('count_tentative_saved') == 3:
             return True
     return False
 
-# Dizionario che rappresenta gli account utente con password, stato di blocco e numero di tentativi
-accounts = {             # Creazione del Dict
+# Dictionary representing user accounts with password, lockout status and number of attempts
+accounts = {             # Creation of the dict
     'Giacomo': {'password': '1425', 'block': False , 'count_tentative_saved': 0},
     'Andrea': {'password': '1564', 'block': False , 'count_tentative_saved': 1},
     'Pino': {'password': '1768', 'block': True , 'count_tentative_saved': 3}
 }
 
-# Ciclo principale: chiedi il nome utente e verifica lo stato dell'account tramite perceptron
+# Main loop: ask for username and check account status via perceptron
 while True:
     user_input = input('Write you name for the account: ').capitalize()
     locked =  1 if account_locked(accounts, user_input) else 0
@@ -70,7 +70,7 @@ while True:
             max_attemps = 3
             authenticated = False
             
-            # Fino a 3 tentativi per inserire il PIN corretto
+            # Up to 3 attempts to enter the correct PIN
             while count < max_attemps:
                 user_pin = input('Enter the pin: ')
                 check_pin = 1 if check_user_pin(accounts, user_input, user_pin) else 0
