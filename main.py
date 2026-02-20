@@ -27,7 +27,7 @@ def check_user_pin(account_data, pin, entered_pin):
     return False    # Altrimenti False
 
 # Returns True if the account is blocked
-def account_locked(account_data, username_locked):  # Funzione per controllare se l'account è bloccato
+def account_locked(account_data, username_locked):  # Function to check if the account is locked
     if username_locked in account_data:
         if accounts[username_locked].get('block') == True:
             return True
